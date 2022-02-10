@@ -1,11 +1,11 @@
 import React from "react";
 
-const UserDetail = (props: any) => {
+const UserDetail = ({ user }: any) => {
   return (
     <div>
-      <div>{props.user?.name}</div>
-      <div>{props.user?.email}</div>
-      <div>{props.user?.phone}</div>
+      <div>{user?.name}</div>
+      <div>{user?.email}</div>
+      <div>{user?.phone}</div>
     </div>
   );
 };
