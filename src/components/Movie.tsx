@@ -1,6 +1,6 @@
 import React from "react";
 
-const Movie = ({ movie }: any) => {
+const Movie = ({ movie, removeMovie }: any) => {
   return (
     <div className="movie">
       <div className="movie-title">
@@ -8,7 +8,13 @@ const Movie = ({ movie }: any) => {
         <span className="movie-year">({movie.year})</span>
       </div>
       <div>
-        <button>삭제</button>
+        <button
+          onClick={() => {
+            removeMovie(movie.id);
+          }}
+        >
+          삭제
+        </button>
       </div>
     </div>
   );

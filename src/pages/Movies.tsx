@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Movie from "../components/Movie";
+import MovieForm from "../components/MovieForm";
 
 interface MovieSet {
   id: Date;
@@ -10,17 +11,30 @@ interface MovieSet {
 const Movies = () => {
   const [movies, setMovies] = useState<MovieSet[]>([]);
 
-  const renderMovies = (id: Date) => {
-    movies.map((movie) => {
-      return <Movie key={movie.id} movie={movie} />;
-    });
+  const removeMovie = (id: Date) => {
+    setMovies(
+      movies.filter((movie) => {
+        return movie.id !== id;
+      })
+    );
+  };
+
+  const renderMovies = movies.length
+    ? movies.map((movie) => {
+        return <Movie movie={movie} key={movie.id} removeMovie={removeMovie} />;
+      })
+    : "추가된 영화가 없습니다.";
+
+  const addMovie = (movie: MovieSet) => {
+    setMovies([...movies, movie]);
   };
 
   return (
-    <>
-      <h1>Movies</h1>
+    <React.Fragment>
+      <h1>Movie List</h1>
+      <MovieForm addMovie={addMovie} />
       {renderMovies}
-    </>
+    </React.Fragment>
   );
 };
 
